@@ -53,11 +53,8 @@ const InputModal = () => {
                 wrapperClassName="datePicker"
               />
             </FormControl>
+
             <FormControl>
-              <FormLabel className="required">Name</FormLabel>
-              <Input ref={initialRef} placeholder="Name" />
-            </FormControl>
-            <FormControl mt={4}>
               <FormLabel>
                 Systolic<span className="units required"> (mmHg)</span>
               </FormLabel>
