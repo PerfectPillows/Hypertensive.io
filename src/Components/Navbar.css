@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Arsenal:wght@400;700&display=swap");
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  background-color: rgb(80, 5, 0);
+}
+.symbol {
+  font-size: 30px;
+  font-weight: 700;
+  font-family: "Arsenal";
+  float: left;
+  margin-left: 10px;
+  color: rgb(194, 121, 121);
+}
+.symbol:hover {
+  color: white;
+}
+
+.nav {
+  display: flex;
+  list-style: none;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Arsenal";
+  text-align: center;
+}
+
+.nav li {
+  width: 125px;
+  padding: 10px;
+  color: rgb(194, 121, 121);
+}
+.nav li:hover {
+  color: white;
+}
+.icon {
+  color: rgb(194, 121, 121);
+}

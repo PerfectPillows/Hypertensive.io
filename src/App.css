@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+.top-react-icons {
+  color: blue;
+  display: inline;
+  margin-left: 5px;
+  padding: 2px;
+}

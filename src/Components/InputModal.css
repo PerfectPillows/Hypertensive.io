@@ -1,0 +1,45 @@
+.float-button {
+  left: 95%;
+  top: 45vh;
+  border-radius: 50%;
+  padding: 0px;
+  color: white;
+  background-color: rgb(80, 5, 0);
+}
+.float-button:hover {
+  color: black;
+  background-color: rgb(194, 121, 121);
+}
+.modal-topic {
+  font-size: larger;
+}
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+  display: block;
+  width: 100%;
+}
+.required::after {
+  content: "*";
+  color: red;
+  display: inline;
+}
+.units {
+  font-size: smaller;
+}
+.checkbox {
+  border-color: rgb(184, 197, 202);
+}
+.star {
+  color: red;
+  font-size: large;
+}
+.index {
+  font-size: small;
+}
+.save-btn:hover {
+  background-color: rgb(119, 201, 119);
+}
+.close-btn:hover {
+  background-color: rgb(238, 111, 111);
+}
