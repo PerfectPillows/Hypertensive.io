@@ -3,7 +3,7 @@
 .top-nav {
   position: sticky;
   top: 0;
-  background-color: rgb(80, 5, 0);
+  background-color: rgb(6, 7, 49);
 }
 .symbol {
   font-size: 30px;
@@ -11,10 +11,10 @@
   font-family: "Arsenal";
   float: left;
   margin-left: 10px;
-  color: rgb(194, 121, 121);
+  color: rgb(212, 224, 231);
 }
 .symbol:hover {
-  color: white;
+  color: rgb(119, 186, 241);
 }
 
 .nav {
@@ -29,11 +29,14 @@
 .nav li {
   width: 125px;
   padding: 10px;
-  color: rgb(194, 121, 121);
+  color: rgb(212, 224, 231);
 }
 .nav li:hover {
-  color: white;
+  color: rgb(119, 186, 241);
 }
 .icon {
-  color: rgb(194, 121, 121);
+  color: rgb(212, 224, 231);
+}
+.icon-heart {
+  color: red;
 }

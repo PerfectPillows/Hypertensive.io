@@ -1,15 +1,22 @@
+.table {
+  color: rgb(6, 7, 49);
+}
+.table-head {
+  background-color: rgb(212, 224, 231);
+}
+
 .float-button {
   left: 95%;
-  top: 45vh;
+  top: 55vh;
   border-radius: 50%;
   padding: 0px;
-  color: white;
-  background-color: rgb(80, 5, 0);
+  overflow: scroll;
+  background-color: rgb(6, 7, 49);
 }
 .float-button:hover {
-  color: black;
-  background-color: rgb(194, 121, 121);
+  background-color: rgb(6, 25, 100);
 }
+
 .modal-topic {
   font-size: larger;
 }
@@ -19,11 +26,7 @@
   display: block;
   width: 100%;
 }
-.required::after {
-  content: "*";
-  color: red;
-  display: inline;
-}
+
 .units {
   font-size: smaller;
 }

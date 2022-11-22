@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { IconContext } from "react-icons";
 import DatePicker from "react-datepicker";
+import { AiOutlinePlus } from "react-icons/ai";
 
 import "react-datepicker/dist/react-datepicker.css";
 import {
@@ -17,24 +19,74 @@ import {
   FormLabel,
   useDisclosure,
 } from "@chakra-ui/react";
-// import { Button } from "@chakra-ui/react";
 import "./InputModal.css";
 
-const InputModal = () => {
-  const [startDate, setStartDate] = useState(new Date());
+const InputModal = (props) => {
+  const [startDate, setStartDate] = useState(new Date()); //for date-picker
+  const { isOpen, onOpen, onClose } = useDisclosure({
+    onOpen: () => {
+      setSystolic("");
+      setDiastolic("");
+      setPulse("");
+    },
+  }); //for modal
+  const [systolic, setSystolic] = useState("");
+  const [diastolic, setDiastolic] = useState("");
+  const [pulse, setPulse] = useState("");
+  const [notes, setNotes] = useState("");
+  const [isIrregular, setIsIrregular] = useState(false);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const systolicChangeHandler = (event) => {
+    setSystolic(event.target.value);
+  };
 
-  const initialRef = React.useRef(null);
-  // const finalRef = React.useRef(null);
+  const diastolicChangeHandler = (event) => {
+    setDiastolic(event.target.value);
+  };
 
-  // const clickHandler = () => {
-  //   console.log("float button clicked!");
-  // };
+  const pulseChangeHandler = (event) => {
+    setPulse(event.target.value);
+  };
+  const notesChangeHandler = (event) => {
+    setNotes(event.target.value);
+  };
+  const heartBeatHandler = () => {
+    setIsIrregular(!isIrregular);
+  };
+
+  const handleSubmit = () => {
+    onClose();
+    props.addReadings(createNewDataObject());
+    resetReadings();
+  };
+  const createNewDataObject = () => {
+    const newData = {
+      id: props.totalReadings + 1,
+      systolic: parseInt(systolic),
+      diastolic: parseInt(diastolic),
+      pulse: parseInt(pulse),
+      date: startDate,
+      notes: notes,
+      irregularBeats: isIrregular,
+    };
+
+    return newData;
+  };
+
+  const resetReadings = () => {
+    setSystolic("");
+    setDiastolic("");
+    setPulse("");
+    setNotes("");
+    setIsIrregular(false);
+  };
+
   return (
     <>
       <Button className="float-button p-5" size="lg" onClick={onOpen}>
-        +
+        <IconContext.Provider value={{ className: "top-react-icons" }}>
+          <AiOutlinePlus size={30} color="white" />
+        </IconContext.Provider>
       </Button>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
@@ -43,44 +95,74 @@ const InputModal = () => {
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
-              <FormLabel>Date & Time</FormLabel>
+              <FormLabel>Date</FormLabel>
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
-                dateFormat="dd/MM/yyyy h:mm aa"
-                timeIntervals={1}
-                showTimeSelect
+                dateFormat="MMMM d, yyyy"
                 wrapperClassName="datePicker"
               />
             </FormControl>
+            <FormControl>
+              <FormLabel>Time</FormLabel>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={1}
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+              />
+            </FormControl>
 
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>
-                Systolic<span className="units required"> (mmHg)</span>
+                Systolic<span className="units"> (mmHg)</span>
               </FormLabel>
-              <Input placeholder="Systolic" />
+              <Input
+                placeholder="Systolic"
+                type="number"
+                value={systolic}
+                onChange={systolicChangeHandler}
+              />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>
-                Diastolic<span className="units required"> (mmHg)</span>
+                Diastolic<span className="units"> (mmHg)</span>
               </FormLabel>
-              <Input placeholder="Diastolic" />
+              <Input
+                placeholder="Diastolic"
+                value={diastolic}
+                onChange={diastolicChangeHandler}
+              />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>
                 Pulse<span className="units"> (BPM)</span>
               </FormLabel>
-              <Input placeholder="Pulse" />
+              <Input
+                placeholder="Pulse"
+                value={pulse}
+                onChange={pulseChangeHandler}
+              />
             </FormControl>
-
-            <Checkbox className="checkbox p-3" colorScheme="red">
+            <Checkbox
+              value={isIrregular}
+              className="checkbox"
+              colorScheme="red"
+              onChange={heartBeatHandler}
+            >
               Irregular Heartbeat
             </Checkbox>
 
-            <FormControl>
-              <FormLabel>Notes</FormLabel>
-              <Input placeholder="Enter remarks..." />
-            </FormControl>
+            <FormLabel optionalIndicator>Notes</FormLabel>
+            <Input
+              placeholder="Enter remarks..."
+              value={notes}
+              onChange={notesChangeHandler}
+            />
+
             <FormControl>
               <div className="index mt-2">
                 <span className="star">*</span>Required fields
@@ -88,11 +170,20 @@ const InputModal = () => {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button className="mr-5 save-btn" colorScheme="green">
-              Save
-            </Button>
-            <Button className="close-btn" onClick={onClose} colorScheme="red">
+            <Button
+              className="mr-5 close-btn"
+              onClick={onClose}
+              colorScheme="red"
+            >
               Close
+            </Button>
+            <Button
+              className="save-btn"
+              type="submit"
+              colorScheme="green"
+              onClick={handleSubmit}
+            >
+              Save
             </Button>
           </ModalFooter>
         </ModalContent>

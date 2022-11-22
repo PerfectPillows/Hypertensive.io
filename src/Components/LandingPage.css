@@ -11,12 +11,14 @@
   font-family: "Arsenal";
   font-weight: 700;
   font-size: 100px;
-  color: rgb(80, 5, 0);
+  color: rgb(212, 224, 231);
+  text-shadow: 1px 1px 2px black, 0 0 25px rgb(1, 1, 255), 0 0 5px rgb(3, 3, 66);
 }
 .description {
   text-align: center;
   font-family: "Arsenal";
   font-weight: 400;
   font-size: 20px;
-  color: rgb(80, 5, 0);
+  color: rgb(0, 0, 0);
+  text-shadow: 1px 1px 1px rgb(0, 0, 255);
 }

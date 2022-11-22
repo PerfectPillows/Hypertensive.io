@@ -6,6 +6,9 @@ const InputData = [
     date: new Date(),
     systolic: 120,
     diastolic: 80,
+    pulse: 75,
+    notes: "good",
+    irregularBeats: "",
   },
   {
     id: 2,
@@ -14,6 +17,9 @@ const InputData = [
     date: new Date(),
     systolic: 120,
     diastolic: 72,
+    pulse: 75,
+    notes: "good",
+    irregularBeats: "",
   },
   {
     id: 3,
@@ -22,6 +28,9 @@ const InputData = [
     date: new Date(),
     systolic: 110,
     diastolic: 60,
+    pulse: 75,
+    notes: "low",
+    irregularBeats: "",
   },
 ];
 
