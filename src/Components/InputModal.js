@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { IconContext } from "react-icons";
 import DatePicker from "react-datepicker";
-import { AiOutlinePlus } from "react-icons/ai";
 
 import "react-datepicker/dist/react-datepicker.css";
 import {
@@ -57,6 +56,7 @@ const InputModal = (props) => {
   const handleSubmit = () => {
     onClose();
     props.addReadings(createNewDataObject());
+
     resetReadings();
   };
   const createNewDataObject = () => {
@@ -83,11 +83,6 @@ const InputModal = (props) => {
 
   return (
     <>
-      <Button className="float-button p-5" size="lg" onClick={onOpen}>
-        <IconContext.Provider value={{ className: "top-react-icons" }}>
-          <AiOutlinePlus size={30} color="white" />
-        </IconContext.Provider>
-      </Button>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>

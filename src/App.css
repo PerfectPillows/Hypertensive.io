@@ -37,8 +37,22 @@
   }
 }
 .top-react-icons {
-  color: blue;
   display: inline;
-  margin-left: 5px;
   padding: 2px;
+}
+.delete-icon {
+  margin: 1em;
+  color: #707070;
+}
+.delete-icon:hover {
+  color: rgb(72, 74, 80);
+  cursor: pointer;
+}
+.edit-icon {
+  margin: 1em;
+  color: #707070;
+}
+.edit-icon:hover {
+  color: rgb(72, 74, 80);
+  cursor: pointer;
 }

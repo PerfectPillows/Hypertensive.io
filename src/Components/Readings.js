@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { IconContext } from "react-icons";
+import { AiOutlinePlus } from "react-icons/ai";
+import { Button } from "@chakra-ui/react";
+import { MdDelete } from "react-icons/md";
+import { AiFillEdit } from "react-icons/ai";
 import { useToast } from "@chakra-ui/react";
 import { format } from "date-fns";
 import InputData from "../Data/InputData";
@@ -20,6 +25,7 @@ import "./Navbar.css";
 
 const Readings = () => {
   const [readings, setReadings] = useState(InputData);
+
   const toast = useToast();
 
   const addReadings = (newReading) => {
@@ -32,6 +38,10 @@ const Readings = () => {
       duration: 2000,
       isClosable: true,
     });
+  };
+
+  const openModal = () => {
+    console.log("Modal Opened");
   };
 
   return (
@@ -55,6 +65,8 @@ const Readings = () => {
                   <Th isNumeric>Pulse</Th>
                   <Th>Irregular Heartbeat</Th>
                   <Th>Notes</Th>
+                  <Th>Delete</Th>
+                  <Th>Edit</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -68,6 +80,28 @@ const Readings = () => {
                       <Td isNumeric>{reading.pulse}</Td>
                       <Td>{reading.irregularBeats ? "yes" : "no"}</Td>
                       <Td>{reading.notes}</Td>
+                      <Td>
+                        <IconContext.Provider
+                          value={{ className: "delete-icon" }}
+                        >
+                          <MdDelete
+                            onClick={() => {
+                              let copy = [...readings];
+                              copy = copy.filter(
+                                (item) => item.id !== reading.id
+                              );
+                              setReadings(copy);
+                            }}
+                          />
+                        </IconContext.Provider>
+                      </Td>
+                      <Td>
+                        <IconContext.Provider
+                          value={{ className: "edit-icon" }}
+                        >
+                          <AiFillEdit />
+                        </IconContext.Provider>
+                      </Td>
                     </Tr>
                   );
                 })}
@@ -76,6 +110,11 @@ const Readings = () => {
           </TableContainer>
         </div>
       )}
+      <Button className="float-button p-5" size="lg" onClick={openModal}>
+        <IconContext.Provider value={{ className: "top-react-icons" }}>
+          <AiOutlinePlus size={30} color="white" />
+        </IconContext.Provider>
+      </Button>
       <InputModal totalReadings={readings.length} addReadings={addReadings} />
     </div>
   );

@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Arsenal:wght@400;700&display=swap");
+body {
+  border: solid magenta;
+}
+
 .content {
   width: 100%;
   height: 100vh;
