@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { IconContext } from "react-icons";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Button } from "@chakra-ui/react";
@@ -26,6 +26,8 @@ import "./Navbar.css";
 const Readings = () => {
   const [readings, setReadings] = useState(InputData);
 
+  const modalRef = useRef();
+
   const toast = useToast();
 
   const addReadings = (newReading) => {
@@ -38,10 +40,6 @@ const Readings = () => {
       duration: 2000,
       isClosable: true,
     });
-  };
-
-  const openModal = () => {
-    console.log("Modal Opened");
   };
 
   return (
@@ -73,14 +71,26 @@ const Readings = () => {
                 {readings.map((reading) => {
                   return (
                     <Tr key={reading.id}>
-                      <Td>{format(reading.date, "dd/MM/yyyy")}</Td>
-                      <Td>{format(reading.date, "h:mm aa")}</Td>
-                      <Td isNumeric>{reading.systolic}</Td>
-                      <Td isNumeric>{reading.diastolic}</Td>
-                      <Td isNumeric>{reading.pulse}</Td>
-                      <Td>{reading.irregularBeats ? "yes" : "no"}</Td>
-                      <Td>{reading.notes}</Td>
-                      <Td>
+                      <Td color="brand.100">
+                        {format(reading.date, "dd/MM/yyyy")}
+                      </Td>
+                      <Td color="brand.100">
+                        {format(reading.date, "h:mm aa")}
+                      </Td>
+                      <Td color="brand.100" isNumeric>
+                        {reading.systolic}
+                      </Td>
+                      <Td color="brand.100" isNumeric>
+                        {reading.diastolic}
+                      </Td>
+                      <Td color="brand.100" isNumeric>
+                        {reading.pulse}
+                      </Td>
+                      <Td color="brand.100">
+                        {reading.irregularBeats ? "yes" : "no"}
+                      </Td>
+                      <Td color="brand.100">{reading.notes}</Td>
+                      <Td color="brand.100">
                         <IconContext.Provider
                           value={{ className: "delete-icon" }}
                         >
@@ -95,11 +105,15 @@ const Readings = () => {
                           />
                         </IconContext.Provider>
                       </Td>
-                      <Td>
+                      <Td color="brand.100">
                         <IconContext.Provider
                           value={{ className: "edit-icon" }}
                         >
-                          <AiFillEdit />
+                          <AiFillEdit
+                            onClick={() =>
+                              modalRef.current.onEditReading(reading)
+                            }
+                          />
                         </IconContext.Provider>
                       </Td>
                     </Tr>
@@ -110,12 +124,21 @@ const Readings = () => {
           </TableContainer>
         </div>
       )}
-      <Button className="float-button p-5" size="lg" onClick={openModal}>
+      <InputModal
+        ref={modalRef}
+        totalReadings={readings.length}
+        addReadings={addReadings}
+      />
+      <Button
+        bg="brand.200"
+        className="float-button p-5"
+        size="lg"
+        onClick={() => modalRef.current.onAddReading()}
+      >
         <IconContext.Provider value={{ className: "top-react-icons" }}>
           <AiOutlinePlus size={30} color="white" />
         </IconContext.Provider>
       </Button>
-      <InputModal totalReadings={readings.length} addReadings={addReadings} />
     </div>
   );
 };

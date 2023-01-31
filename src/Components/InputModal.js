@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { IconContext } from "react-icons";
-import DatePicker from "react-datepicker";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   Checkbox,
@@ -20,7 +19,27 @@ import {
 } from "@chakra-ui/react";
 import "./InputModal.css";
 
-const InputModal = (props) => {
+const InputModal = forwardRef((props, ref) => {
+  useImperativeHandle(ref, () => {
+    return {
+      onAddReading: onAddReading,
+      onEditReading: onEditReading,
+    };
+  });
+
+  const onAddReading = () => {
+    onOpen();
+  };
+
+  const onEditReading = (reading) => {
+    onOpen();
+    setStartDate(reading.date);
+    setSystolic(reading.systolic);
+    setDiastolic(reading.diastolic);
+    setPulse(reading.pulse);
+    setNotes(reading.notes);
+    setIsIrregular(reading.isIrregular);
+  };
   const [startDate, setStartDate] = useState(new Date()); //for date-picker
   const { isOpen, onOpen, onClose } = useDisclosure({
     onOpen: () => {
@@ -90,7 +109,7 @@ const InputModal = (props) => {
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
-              <FormLabel>Date</FormLabel>
+              <FormLabel color="brand.100">Date</FormLabel>
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
@@ -99,7 +118,7 @@ const InputModal = (props) => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Time</FormLabel>
+              <FormLabel color="brand.100">Time</FormLabel>
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
@@ -112,7 +131,7 @@ const InputModal = (props) => {
             </FormControl>
 
             <FormControl isRequired>
-              <FormLabel>
+              <FormLabel color="brand.100">
                 Systolic<span className="units"> (mmHg)</span>
               </FormLabel>
               <Input
@@ -123,7 +142,7 @@ const InputModal = (props) => {
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>
+              <FormLabel color="brand.100">
                 Diastolic<span className="units"> (mmHg)</span>
               </FormLabel>
               <Input
@@ -133,7 +152,7 @@ const InputModal = (props) => {
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>
+              <FormLabel color="brand.100">
                 Pulse<span className="units"> (BPM)</span>
               </FormLabel>
               <Input
@@ -143,6 +162,7 @@ const InputModal = (props) => {
               />
             </FormControl>
             <Checkbox
+              color="brand.100"
               value={isIrregular}
               className="checkbox"
               colorScheme="red"
@@ -151,7 +171,9 @@ const InputModal = (props) => {
               Irregular Heartbeat
             </Checkbox>
 
-            <FormLabel optionalIndicator>Notes</FormLabel>
+            <FormLabel color="brand.100" optionalIndicator>
+              Notes
+            </FormLabel>
             <Input
               placeholder="Enter remarks..."
               value={notes}
@@ -185,5 +207,5 @@ const InputModal = (props) => {
       </Modal>
     </>
   );
-};
+});
 export default InputModal;

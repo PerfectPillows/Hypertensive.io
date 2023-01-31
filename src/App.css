@@ -38,7 +38,7 @@
 }
 .top-react-icons {
   display: inline;
-  padding: 2px;
+  padding: 3px;
 }
 .delete-icon {
   margin: 1em;
@@ -55,4 +55,7 @@
 .edit-icon:hover {
   color: rgb(72, 74, 80);
   cursor: pointer;
+}
+.theme-icon {
+  color: black;
 }

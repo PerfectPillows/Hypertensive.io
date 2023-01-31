@@ -1,9 +1,13 @@
+import React from "react";
 import { IconContext } from "react-icons";
 import { NavLink } from "react-router-dom";
 import { AiOutlineDatabase } from "react-icons/ai";
 import { BsClipboardData } from "react-icons/bs";
 import { BsSuitHeartFill } from "react-icons/bs";
+import ToggleColor from "./TogggleColor";
+
 import "./Navbar.css";
+
 const StyledNavbar = () => {
   return (
     <nav className="top-nav">
@@ -32,6 +36,7 @@ const StyledNavbar = () => {
             Statistics
           </NavLink>
         </li>
+        <ToggleColor />
       </ul>
     </nav>
   );
