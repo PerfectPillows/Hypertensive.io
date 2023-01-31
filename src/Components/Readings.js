@@ -53,7 +53,7 @@ const Readings = () => {
       {readings.length > 0 && (
         <div>
           <TableContainer className="p-4">
-            <Table className="table" variant="unstyled" size="sm">
+            <Table className="table" size="sm">
               <Thead className="table-head">
                 <Tr>
                   <Th>Date</Th>
