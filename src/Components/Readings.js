@@ -54,7 +54,7 @@ const Readings = () => {
         <div>
           <TableContainer className="p-4">
             <Table className="table" size="sm">
-              <Thead className="table-head">
+              <Thead className="table-head dark:bg-slate-700 ">
                 <Tr>
                   <Th>Date</Th>
                   <Th>Time</Th>
